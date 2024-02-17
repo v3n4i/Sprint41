@@ -9,6 +9,8 @@ public class OrderElements {
     public static final By orderOneButton = By.xpath(".//button[@class=\"Button_Button__ra12g\"]");
     // кнопка заказать внизу
     public static final By orderTwoButton = By.xpath(".//button[@class=\"Button_Button__ra12g Button_Middle__1CSJM\"]");
+    //кнопка куки
+    public static final By cookieButton = By.xpath(".//button[text()='да все привыкли']");
     // икс-пассы для первой страницы заказа: имя, фамилия, адрес, телефон и кнопка далее
     public static final By nameInOrderPage = By.xpath(".//input[@placeholder=\"* Имя\"]");
     public static final By surnameInOrderPage = By.xpath(".//input[@placeholder=\"* Фамилия\"]");
@@ -25,8 +27,8 @@ public class OrderElements {
     //кнопка на проверку - если появилась то ассерт будет passed
     public static final By checkForOrderPage = By.xpath(".//button[text()='Посмотреть статус']");
     //метод для заказа по кнопке наверху
-    public void clickOrderOneButton() {
-        driver.findElement(orderOneButton).click();
+    public void clickOrderOneButton(By button) {
+        driver.findElement(button).click();
     }
     //метод на заполнение имени(имя из параметризации берётся)
     public void fillName(String name) {
@@ -101,4 +103,7 @@ public class OrderElements {
     //метод для заказа по кнопке внизу
     public void clickOrderTwoButton() {
         driver.findElement(orderTwoButton).click();}
+    public void clickOnCookie() {
+        driver.findElement(cookieButton).click();
+    }
 }

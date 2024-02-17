@@ -45,18 +45,17 @@ public class MainPage {
 
     protected WebDriver driver =  new ChromeDriver();
 
-
     @Before
     public void beforeMethod() {
         driver.get("https://qa-scooter.praktikum-services.ru/");
     }
+    Elements elements = new Elements(driver);
 
     @Test
     public void headersTest() {
-        Elements elements = new Elements(driver);
         elements.clickOnCookie();
         elements.scrollUntilElement(mainQuestionsText);
-        new WebDriverWait(driver, Duration.ofSeconds(700)).until(ExpectedConditions.elementToBeClickable(By.xpath(".//div[text()='Вопросы о важном']")));
+        new WebDriverWait(driver, Duration.ofSeconds(700)).until(ExpectedConditions.elementToBeClickable(mainQuestionsText));
         elements.clickArrowOne(button);
         assertEquals(expected, elements.getTextOfArrow(checkText));
     }

@@ -1,16 +1,20 @@
 import OrderPageCheck.OrderElements;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
+import org.openqa.selenium.By;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.junit.*;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 
+import static OrderPageCheck.OrderElements.orderOneButton;
+import static OrderPageCheck.OrderElements.orderTwoButton;
 import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
 public class OrderPageByUpButton {
-
+    private final By button;
     private final String name;
     private final String surname;
     private final String address;
@@ -21,7 +25,8 @@ public class OrderPageByUpButton {
     private final String color;
     private final boolean expected;
 
-    public OrderPageByUpButton(String name, String surname, String address, String metro, String phone, String date, String limit, String color, boolean expected) {
+    public OrderPageByUpButton(By button, String name, String surname, String address, String metro, String phone, String date, String limit, String color, boolean expected) {
+        this.button=button;
         this.name = name;
         this.surname = surname;
         this.address = address;
@@ -38,8 +43,8 @@ public class OrderPageByUpButton {
     @Parameterized.Parameters
     public static Object[][] getTestData() {
         return new Object[][]{
-                {"Вадим", "Куликов", "г. Саратов, ул. Большая Горная 313, кв.47", "Черкизовская", "79372680801", "01.03.2024", "сутки", "чёрный жемчуг", true},
-                {"Дима", "Козин", "г. Саратов, ул. Астраханская 57 кв.34", "Сокольники", "79372680801", "05.03.2024", "двое суток", "серая безысходность", true}
+                {orderOneButton, "Вадим", "Куликов", "г. Саратов, ул. Большая Горная 313, кв.47", "Черкизовская", "79372680801", "01.03.2024", "сутки", "чёрный жемчуг", true},
+                {orderTwoButton, "Дима", "Козин", "г. Саратов, ул. Астраханская 57 кв.34", "Сокольники", "79372680801", "05.03.2024", "двое суток", "серая безысходность", true}
 
         };
     }
@@ -56,7 +61,8 @@ public class OrderPageByUpButton {
     @Test
     public void orderPageTest() {
         OrderElements singleElements = new OrderElements(driver);
-        singleElements.clickOrderOneButton();
+        singleElements.clickOnCookie();
+        singleElements.clickOrderOneButton(button);
         singleElements.fillName(name);
         singleElements.fillSurname(surname);
         singleElements.fillAddress(address);
@@ -72,10 +78,10 @@ public class OrderPageByUpButton {
 
     }
 
-    @After
-    public void quit() {
-        driver.quit();
-    }
+//    @After
+//    public void quit() {
+//        driver.quit();
+//    }
 }
 
 
